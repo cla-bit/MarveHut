@@ -1,0 +1,66 @@
+{% extends 'home/base/base.html' %}
+{% load static %}
+
+		{% block Home %}
+
+		<!--  About Section  -->
+    <div class="about-box">
+		<!-- BLOG Section  -->
+		<div id="blog" class="container-fluid bg-dark text-light py-5 text-center wow fadeIn">
+			<h2 class="section-title py-5">EVENTS AT THE MARVE'S HUT</h2>
+			<div class="row justify-content-center">
+				<div class="col-sm-7 col-md-4 mb-5">
+					<ul class="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
+						<li class="nav-item">
+							<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#foods" role="tab" aria-controls="pills-home" aria-selected="true">Foods</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#juices" role="tab" aria-controls="pills-profile" aria-selected="false">Juices</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="tab-content" id="pills-tabContent">
+				<div class="tab-pane fade show active" id="foods" role="tabpanel" aria-labelledby="pills-home-tab">
+					<div class="row">
+
+						{% for food in event_food %}
+						<div class="col-md-4">
+							<div class="card bg-transparent border my-3 my-md-0">
+								<img src="{{ food.food_img.url }}" alt="" class="rounded-0 card-img-top mg-responsive">
+								<div class="card-body">
+									<h1 class="text-center mb-4"><span class="badge badge-primary">$ {{ food.food_price }}</span></h1>
+									<h4 class="pt20 pb20">{{ food.food_name }}</h4>
+									<p class="text-white"><i class="mdi mdi-clock"></i>{{ food.food_time|time }}</p>
+									<p class="text-white"><i class="mdi mdi-calendar"></i>{{ food.food_from_date|date:"l" }} - {{ food.food_to_date|date:"l" }}</p>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+
+					</div>
+				</div>
+				<div class="tab-pane fade" id="juices" role="tabpanel" aria-labelledby="pills-profile-tab">
+					<div class="row">
+
+						{% for drink in event_drink %}
+						<div class="col-md-4 my-3 my-md-0">
+							<div class="card bg-transparent border">
+								<img src="{{ drink.drink_img.url }}" alt="" class="rounded-0 card-img-top mg-responsive">
+								<div class="card-body">
+									<h1 class="text-center mb-4"><span class="badge badge-primary">$ {{drink.drink_price }}</span></h1>
+									<h4 class="pt20 pb20">{{ drink.drink_name }}</h4>
+									<p class="text-white"><i class="mdi mdi-clock"></i>{{ drink.drink_time|time }}</p>
+									<p class="text-white"><i class="mdi mdi-calendar"></i>{{ drink.drink_from_date|date:"l" }} - {{ drink.drink_to_date|date:"l" }}</p>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+    </div>
+		{% endblock %}

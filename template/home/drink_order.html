@@ -1,0 +1,39 @@
+{% extends 'home/base/base.html' %}
+{% load static %}
+
+
+		{% block Home %}
+		<!--  gallary Section  -->
+		<div id="gallery" class="text-center bg-dark text-light has-height-md middle-items wow fadeIn">
+			<div class="text-height">
+                <h2 class="section-title py-5">Drink Detail</h2>
+            </div>
+		</div>
+		<div class="container book-container">
+            <div class="row mb-3 book-item-content">
+                <div class="col-md-4 themed-grid-col">
+                    <img src="{{ drink.drink_img.url }}" alt="" class="img-fluid">
+                </div>
+                <div class="col-md-8 themed-grid-col right-box">
+                    <div class="food-title">
+                        <h5>{{ drink.drink_name }}</h5>
+                    </div>
+                    <div class="food-price-box">
+                        <h4>$<span>{{ drink.drink_price }}</span></h4>
+                        <hr class="border-line mb-3">
+                    </div>
+                    <div class="food-description">
+                        <p>{{ drink.drink_desc }}</p>
+                        <p class="text-warning">Contains:</p>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <h6>{{ drink.drink_allergic }}</h6>
+                         </div>
+                    </div>
+                </div>
+            </div>            
+		</div>
+		<div class="view-more">
+			<a class="btn btn-lg btn-primary" href="{% url 'marveHome:drink' %}">Go Back</a>
+		</div>
+
+      {% endblock %}

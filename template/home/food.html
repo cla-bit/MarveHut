@@ -1,0 +1,49 @@
+{% extends 'home/base/base.html' %}
+{% load static %}
+
+
+		{% block Home %}
+		<!--  gallary Section  -->
+		<div id="gallery" class="text-center bg-dark text-light has-height-md middle-items wow fadeIn">
+			<div class="text-height">
+                <h2 class="section-title py-5">Food Menu Gallery</h2>
+            </div>
+		</div>
+		<div class="gallary row" id="gallery-box">
+			{% for meal in food %}
+			<div class="col-sm-6 col-lg-3 gallary-item wow fadeIn">
+				<img src="{{ meal.food_img.url }}" alt="template by DevCRID http://www.devcrud.com/" class="gallary-img">
+				<a href="{{ meal.get_absolute_url }}" class="gallary-overlay">
+					<div class="gallery-box">
+						<h6>{{ meal.food_name }}</h6>
+						<i class="gallary-icon mdi mdi-plus"></i>
+					</div>
+				</a>
+			</div>
+			{% endfor %}
+		</div>
+
+		<div class="mt-4">
+		{% if is_paginated %}
+			{% if page_obj.has_other_pages %}
+				{% if page_obj.has_previous %}
+					<a class="btn btn-outline-primary" href="?page=1"><i class="mdi mdi-chevron-triple-left"></i></a>
+					<a class="btn btn-outline-primary" href="?page={{ page_obj.previous_page_number }}"><i class="mdi mdi-chevron-double-left"></i></a>
+				{% endif %}
+
+				{% for num in page_obj.paginator.page_range %}
+					{% if page_obj.number == num %}
+						<a class="btn btn-primary" href="?page={{ num }}">{{ num }}</a>
+					{% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+						<a class="btn btn-outline-primary" href="?page={{ num }}">{{ num }}</a>
+					{% endif %}
+				{% endfor %}
+
+				{% if page_obj.has_next %}
+					<a class="btn btn-outline-primary" href="?page={{ page_obj.next_page_number }}"><i class="mdi mdi-chevron-double-right"></i></a>
+					<a class="btn btn-outline-primary" href="?page={{ page_obj.paginator.num_pages }}"><i class="mdi mdi-chevron-triple-right"></i></a>
+				{% endif %}
+			{% endif %}
+		{% endif %}
+		</div>
+		{% endblock %}

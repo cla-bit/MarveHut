@@ -1,0 +1,52 @@
+{% extends 'home/base/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+		{% block Home %}
+		<!--  About Section  -->
+		<div class="about-box">
+			<!-- REVIEWS Section  -->
+			<div id="testmonial" class="container-fluid wow fadeIn bg-dark text-light has-height-lg middle-items">
+				<h2 class="section-title my-5 text-center">ADD REVIEW</h2>
+				<div class="row mt-3 mb-5 form-review-box">
+
+					<form action="{% url 'marveHome:add_review' %}" class="form needs-validation" method="POST" enctype="multipart/form-data" novalidate>
+						{% csrf_token %}
+						<div class="form-group">
+							{% render_field form.review_img class+="form-control m-3" type="file" placeholder="Enter your name"%}
+							{% render_field form.review_name class+="form-control m-3 required" placeholder="Enter your name" %}
+							{% render_field form.review_text class+="form-control m-3 textarea required" placeholder="Enter yor review" %}
+						</div>
+						<button type="submit" class="btn btn-primary btn-sm">Submit review</button>
+					</form>
+
+				</div>
+			</div>
+		</div>
+
+		<script>
+			// validation
+			// Example starter JavaScript for disabling form submissions if there are invalid fields
+			(function () {
+			  	'use strict'
+
+			  	// Fetch all the forms we want to apply custom Bootstrap validation styles to
+			  	var forms = document.querySelectorAll('.needs-validation')
+
+			  	// Loop over them and prevent submission
+			  	Array.prototype.slice.call(forms)
+				.forEach(function (form) {
+					form.addEventListener('submit', function (event) {
+						if (!form.checkValidity()) {
+							event.preventDefault()
+							event.stopPropagation()
+						}
+
+						form.classList.add('was-validated')
+					}, false)
+				})
+			})()
+
+		</script>
+		{% endblock %}
+

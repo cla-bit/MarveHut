@@ -1,0 +1,23 @@
+#gallery-box {
+    display: flex;
+}
+
+.add-cart-flex-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.add-cart-flex-box .form-group .update-btn {
+    display: flex;
+}
+
+.add-cart-flex-box .form-group .update-btn .update-num {
+    max-width: 80px;
+    margin: 0 2px;
+}
+
+.btn-plus {
+    background:
+}

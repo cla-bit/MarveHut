@@ -1,0 +1,197 @@
+{% extends 'home/base/base.html' %}
+{% load static %}
+
+		{% block Home %}
+		<!-- header -->
+		<header id="home" class="header">
+			<div class="overlay text-white text-center">
+				<h1 class="display-2 font-weight-bold my-3">Marve's Hut</h1>
+				<h2 class="display-4 mb-5">Always fresh, Delightful and Spicy</h2>
+				<a class="btn btn-lg btn-primary" href="{% url 'marveHome:food' %}">View our gallery</a>
+			</div>
+		</header>
+
+		<!--  About Section  -->
+		<div id="about" class="container-fluid wow fadeIn" data-wow-duration="1.5s">
+			<div class="row">
+				<div class="col-lg-6 has-img-bg"></div>
+				<div class="col-lg-6">
+					<div class="row justify-content-center">
+						<div class="col-sm-8 py-5 my-5">
+							<h2 class="mb-4 about-me">About Us</h2>
+							<p>We serve top notched meals in the simplest way to satisfy our customers appetite. Out of a vaierty of dishes served in our environment, Marve's Hut tends to serve customers, fulfilling their appetite and taste buds to our different local and international meals. <br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum necessitatibus iste,
+							nulla recusandae porro minus nemo eaque cum repudiandae quidem voluptate magnam voluptatum? <br>Nobis, saepe sapiente omnis qui eligendi pariatur. quis voluptas. Assumenda facere adipisci quaerat. Illum doloremque quae omnis vitae.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--  gallary Section  -->
+		<div id="gallery" class="text-center bg-dark text-light has-height-md middle-items wow fadeIn">
+			<h2 class="section-title">FOOD MENU</h2>
+		</div>
+		<div class="gallary row">
+			{% for meal in food %}
+			<div class="col-sm-6 col-lg-3 gallary-item wow fadeIn">
+				<img src="{{ meal.food_img.url }}" alt="" class="gallary-img">
+				<a href="{{ meal.get_absolute_url }}" class="gallary-overlay">
+					<div class="gallery-box">
+						<h6>{{ meal.food_name }}</h6>
+						<i class="gallary-icon mdi mdi-plus"></i>
+					</div>
+				</a>
+			</div>
+			{% endfor %}
+		</div>
+		<div class="view-more">
+			<a class="btn btn-lg btn-primary" href="{% url 'marveHome:food' %}">View more</a>
+		</div>
+
+		<!-- book a table Section  -->
+		<div class="container-fluid has-bg-overlay text-center text-light has-height-lg middle-items" id="book-table">
+			<!--  gallary Section  -->
+			<div id="drink" class="text-center text-light has-height-md middle-items wow fadeIn">
+				<h2 class="section-title">DRINK MENU</h2>
+			</div>
+			<div class="gallary row">
+				{% for meal in drink %}
+				<div class="col-sm-6 col-lg-3 gallary-item wow fadeIn">
+					<img src="{{ meal.drink_img.url }}" alt="" class="gallary-img">
+					<a href="{{ meal.get_absolute_url }}" class="gallary-overlay">
+						<div class="gallery-box">
+							<h6>{{ meal.drink_name }}</h6>
+							<i class="gallary-icon mdi mdi-plus"></i>
+						</div>
+					</a>
+				</div>
+				{% endfor %}
+			</div>
+			<div class="view-more">
+				<a class="btn btn-lg btn-primary" href="{% url 'marveHome:drink' %}">View more</a>
+			</div>
+
+		</div>
+
+		<!-- BLOG Section  -->
+		<div id="blog" class="container-fluid bg-dark text-light py-5 text-center wow fadeIn">
+			<h2 class="section-title py-5">EVENTS AT THE MARVE'S HUT</h2>
+			<div class="row justify-content-center">
+				<div class="col-sm-7 col-md-4 mb-5">
+					<ul class="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
+						<li class="nav-item">
+							<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#foods" role="tab" aria-controls="pills-home" aria-selected="true">Foods</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#juices" role="tab" aria-controls="pills-profile" aria-selected="false">Juices</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="tab-content" id="pills-tabContent">
+				<div class="tab-pane fade show active" id="foods" role="tabpanel" aria-labelledby="pills-home-tab">
+					<div class="row">
+
+						{% for food in event_food %}
+						<div class="col-md-4">
+							<div class="card bg-transparent border my-3 my-md-0">
+								<img src="{{ food.food_img.url }}" alt="" class="rounded-0 card-img-top mg-responsive">
+								<div class="card-body">
+									<h1 class="text-center mb-4"><span class="badge badge-primary">$ {{ food.food_price }}</span></h1>
+									<h4 class="pt20 pb20">{{ food.food_name }}</h4>
+									<p class="text-white"><i class="mdi mdi-clock"></i>{{ food.food_time|time }}</p>
+									<p class="text-white"><i class="mdi mdi-calendar"></i>{{ food.food_from_date|date:"l" }} - {{ food.food_to_date|date:"l" }}</p>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+
+					</div>
+				</div>
+				<div class="tab-pane fade" id="juices" role="tabpanel" aria-labelledby="pills-profile-tab">
+					<div class="row">
+
+						{% for drink in event_drink %}
+						<div class="col-md-4 my-3 my-md-0">
+							<div class="card bg-transparent border">
+								<img src="{{ drink.drink_img.url }}" alt="" class="rounded-0 card-img-top mg-responsive">
+								<div class="card-body">
+									<h1 class="text-center mb-4"><span class="badge badge-primary">$ {{drink.drink_price }}</span></h1>
+									<h4 class="pt20 pb20">{{ drink.drink_name }}</h4>
+									<p class="text-white"><i class="mdi mdi-clock"></i>{{ drink.drink_time|time }}</p>
+									<p class="text-white"><i class="mdi mdi-calendar"></i>{{ drink.drink_from_date|date:"l" }} - {{ drink.drink_to_date|date:"l" }}</p>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+
+					</div>
+				</div>				
+			</div>
+		</div>
+
+		<!-- REVIEWS Section  -->
+		<div id="testmonial" class="container-fluid wow fadeIn bg-dark text-light has-height-lg middle-items">
+			<h2 class="section-title my-5 text-center">REVIEWS</h2>
+			<div class="row mt-3 mb-5 owl-carousel owl-theme">
+
+				{% for review in reviews %}
+				<div class="item img-carousel-item">
+					<div class="testmonial-card">
+						<img src="{{ review.review_img.url }}" alt="" srcset="" class="img-box">
+						<h3 class="testmonial-title">{{ review.review_name }}</h3>
+						<div class="testmonial-body">
+							<p>{{ review.review_text }}</p>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+
+			</div>
+		</div>
+
+		<!-- page footer  -->
+		<div class="container-fluid bg-dark text-light has-height-md middle-items border-top text-center wow fadeIn">
+			<div class="row">
+				<div class="col-sm-4">
+					<h3>EMAIL US</h3>
+					<P class="text-muted">info@website.com</P>
+				</div>
+				<div class="col-sm-4">
+					<h3>CALL US</h3>
+					<P class="text-muted">(+234)-801 456-7890</P>
+				</div>
+				<div class="col-sm-4">
+					<h3>FIND US</h3>
+					<P class="text-muted">Lekki, Lagos, Nigeria</P>
+				</div>
+			</div>
+		</div>
+
+		<!-- end of page footer -->
+
+		<script>
+			// validation
+			// Example starter JavaScript for disabling form submissions if there are invalid fields
+			(function () {
+			  	'use strict'
+
+			  	// Fetch all the forms we want to apply custom Bootstrap validation styles to
+			  	var forms = document.querySelectorAll('.needs-validation')
+
+			  	// Loop over them and prevent submission
+			  	Array.prototype.slice.call(forms)
+				.forEach(function (form) {
+					form.addEventListener('submit', function (event) {
+						if (!form.checkValidity()) {
+							event.preventDefault()
+							event.stopPropagation()
+						}
+
+						form.classList.add('was-validated')
+					}, false)
+				})
+			})()
+
+		</script>
+		{% endblock %}

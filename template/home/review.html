@@ -1,0 +1,37 @@
+{% extends 'home/base/base.html' %}
+{% load static %}
+
+		{% block Home %}
+
+		<!--  About Section  -->
+    <div class="about-box">
+		<!--------- Modal popup------------>
+		<div class="review-add-box d-flex justify-content-center">
+			<a href="{% url 'marveHome:add_review' %}" class="btn btn-primary btn-sm"><i class="mdi mdi-plus"></i></a><span>Add review</span>
+		</div>
+		<!--------- end Modal Popup -------------->
+		<!------- modal popup body ------>
+		<!------end modal popup body ---------->
+		<!-- REVIEWS Section  -->
+		<div class="">
+			<div id="testmonial" class="container-fluid wow fadeIn bg-dark text-light has-height-lg middle-items">
+				<h2 class="section-title my-5 text-center">REVIEWS <span>({{ reviews.count }})</span></h2>
+				<div class="row mt-3 mb-5 review-box-container">
+
+					{% for review in reviews %}
+					<div class=" img-carousel-item m-2">
+						<div class="testmonial-card">
+							<img src="{{ review.review_img.url }}" alt="" srcset="" class="img-box">
+							<h3 class="testmonial-title">{{ review.review_name }}</h3>
+							<div class="testmonial-body">
+								<p>{{ review.review_text }}</p>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+
+				</div>
+			</div>
+		</div>
+    </div>
+		{% endblock %}
